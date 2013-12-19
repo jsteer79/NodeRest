@@ -1,0 +1,17 @@
+{
+    "name": "NodeRest",
+    "description": "Simple Rest Test Application",
+    "version": "0.1.0",
+    "private": false,
+    "dependencies": {
+        "express": "3.x"
+    },
+    "devDependencies": {
+        "supertest": "0.5.x",
+        "mocha": "1.8.x",
+        "should": "1.2.x"
+    },
+    "scripts": {
+        "test": "make test"
+    }
+}
