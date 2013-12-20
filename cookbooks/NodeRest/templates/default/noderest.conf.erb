@@ -1,0 +1,25 @@
+# updater_node
+#
+
+description     "Updater node.js front end"
+author          "Todd Kennedy"
+
+<% if node['noderest']['env'] == 'dev' %>
+start on vagrant-mounted
+
+pre-start script
+	[ $MOUNTPOINT = /host ] || stop
+end script
+<% else %>
+start on runlevel [2345]
+<% end %>
+
+stop on runlevel [06]
+
+respawn
+
+# What environment are we in
+chdir <%= node['noderest']['home'] %>
+
+# Start the process
+exec start-stop-daemon --start --chuid <%= node['noderest']['user'] %>:<%= node['noderest']['group'] %> --make-pidfile --pidfile /var/run/noderest.pid --exec <%= node['nodejs']['dir'] %>/bin/node -- <%= node['noderest']['home'] %>/index.js >> <%= node['noderest']['log'] %>/noderest.log 2>&1
