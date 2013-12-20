@@ -19,15 +19,19 @@ NodeRest.prototype.reset = function() {
 }
 
 NodeRest.prototype.get = function( req, res ) {
+    console.log( 'Get' );
     res.status( 200 );
     res.setHeader('Content-Type', 'text/plain' );
     res.setHeader('Content-Length', this.thing.length );
     res.end( this.thing );
+    console.log( 'Done' );
 }
 
 NodeRest.prototype.post = function( req, res ) {
+    console.log( 'Post' );
     if( !req.param( 'thing' ) ) {
         res.status( 400 );
+        res.end();
     } else {
         this.thing = req.param( 'thing' );
         this.get( req, res );
